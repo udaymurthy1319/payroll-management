@@ -1,7 +1,7 @@
 
 
 from flask import Flask, render_template,session,  request, redirect, url_for
-from werkzeug import secure_filename
+from werkzeug.utils import secure_filename
 import sqlite3
 import os
 app = Flask(__name__)
