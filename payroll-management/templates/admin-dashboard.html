@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Employee Payment Management System</title>
+</head>
+
+<body>
+    <br>
+    <div class="row" style="align-items: center;">
+        <div class="col-sm-6">
+
+            <h1 class="orgclr" style="font-size: 20px;"> <img class="w-25" src="../static/images/logo.png"
+                    alt="">Employee Payment Management System
+            </h1>
+        </div>
+        <div class="col-sm-3 float-right"> </div>
+        <div class="col-sm-3 float-right">
+
+            <button class=" btn obtn w-75" onclick="window.location.href='./'">Logout&nbsp;&nbsp;<i
+                    class="fa fa-angle-right fa-lg"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+    </div>
+
+    <div class="container">
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+                    aria-controls="nav-home" aria-selected="true">Users</a>
+                <a class="nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+                    aria-controls="nav-profile" aria-selected="false">Add Users</a>
+
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Mobile</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for t in data %}
+                        <tr>
+                            <td>{{t[1]}}</td>
+                            <td>{{t[0]}}</td>
+                            <td>{{t[2]}}</td>
+                            <td><button class="btn btn-primary" onclick="showDetails('{{t[0]}}')">View</button></td>
+
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <div class="row pt-3">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4">
+                        <form action="../insertUser" method="POST">
+                            <div class="form-group">
+
+                                <input type="text" class="form-control" name="name" aria-describedby="emailHelp"
+                                    placeholder="Full Name" required>
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <input type="email" class="form-control" name="email" aria-describedby="emailHelp"
+                                    placeholder="Email" required>
+
+                            </div>
+                            <div class="form-group">
+
+                                <input type="text" class="form-control" name="uname" aria-describedby="emailHelp"
+                                    placeholder="username" required>
+
+                            </div>
+                            <div class="form-group">
+
+                                <input type="password" class="form-control" name="password" placeholder="Password"
+                                    required>
+                            </div>
+                            <div class="form-group">
+
+                                <input type="text" class="form-control" name="mobile" aria-describedby="emailHelp"
+                                    placeholder="Mobile" required>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="">Admin</label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="isAdmin" id="exampleRadios1"
+                                        value="1" checked>
+                                    <label class="form-check-label" for="exampleRadios1">
+                                        Yes
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+
+                                    <input class="form-check-input" type="radio" name="isAdmin" id="exampleRadios1"
+                                        value="0" checked>
+                                    <label class="form-check-label" for="exampleRadios1">
+                                        No
+                                    </label>
+
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn obtn">Sign Up</button>
+                        </form>
+                    </div>
+                    <div class="col-sm-4"></div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    </div>
+
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Details</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div style="max-height: 350px;overflow-y: auto;">
+                  <table class="table table-striped" >
+                      <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Hours</th>
+                        </tr>
+                      </thead>
+                     
+                      <tbody class="append"></tbody>
+                      
+                  </table>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary">Save changes</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <script>
+        function showDetails(email) {
+            console.log(email)
+            jQuery.ajax({
+                type: 'POST',
+                url: '/getHours',
+                data: JSON.stringify({ "email": email }),
+                contentType: 'application/json',
+                success: function (response_data) {
+                   console.log(response_data)
+                   formUI(response_data)
+                }
+            });
+        }
+        function formUI(data){
+            let tb = ""
+            data['data'].forEach(e => {
+                
+               tb = tb+"<tr><td>"+e[1]+"</td><td>"+e[2]+"</td></tr>"
+            });
+            $('.append').empty()
+            $('.append').append(tb)
+            $('.modal').modal('show')
+        }
+    </script>
+</body>
+
+</html>
